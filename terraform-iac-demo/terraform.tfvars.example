@@ -1,0 +1,4 @@
+# Sample values for the secure storage landing zone
+location               = "westus"
+resource_group_name    = "rg-secure-demo"
+storage_account_name_prefix = "wguaisec"

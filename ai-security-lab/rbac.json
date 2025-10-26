@@ -1,0 +1,7 @@
+{
+  "users": {
+    "analyst_alice": ["query", "summarize"],
+    "viewer_vic":    ["query"],
+    "admin_ada":     ["query", "summarize", "admin"]
+  }
+}

@@ -1,0 +1,7 @@
+import "tfplan/v2" as tfplan
+
+main = rule {
+  all tfplan.module_calls.main.variables.location as loc {
+    loc in tfplan.module_calls.main.variables.sentinel_enforced_regions
+  }
+}

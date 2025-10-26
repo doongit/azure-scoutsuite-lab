@@ -1,0 +1,24 @@
+import "tfplan/v2" as tfplan
+
+main = rule {
+  all storage_accounts as sa {
+    sa.approved
+  }
+}
+
+storage_accounts = func() {
+  resources = tfplan.module_calls.main.resources["azurerm_storage_account.secure_storage"]
+  if resources is null {
+    return []
+  }
+
+  return [rule { approved = validated(resources) }]
+}
+
+validated = func(res) {
+  all res.instances as inst {
+    inst.change.after.public_network_access_enabled is false
+    inst.change.after.min_tls_version == "TLS1_2"
+    inst.change.after.enable_https_traffic_only is true
+  }
+}
