@@ -1,4 +1,4 @@
-﻿# GCP ScoutSuite Demo
+# GCP ScoutSuite Demo
 
 ## Goal
 Scan a GCP project using a **service account JSON key** with viewer-style access.
@@ -7,7 +7,7 @@ Scan a GCP project using a **service account JSON key** with viewer-style access
 - Cloud Resource Manager API
 - Compute Engine API
 - Identity and Access Management (IAM) API
-- Security Command Center API (optional, free tier has limits)
+- Security Command Center API (optional—free tier has limits)
 
 ## Service Account (least privilege)
 Create a service account and grant:

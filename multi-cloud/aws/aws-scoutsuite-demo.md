@@ -1,10 +1,10 @@
-﻿# AWS ScoutSuite Demo
+# AWS ScoutSuite Demo
 
 ## Goal
 Run ScoutSuite on an AWS account (free tier is fine) with **least-privilege read** and document key findings.
 
 ## Minimal IAM Permissions
-Attach **AWS managed** policies to the user/role you'll scan with:
+Attach **AWS managed** policies to the user/role you’ll scan with:
 - `ReadOnlyAccess`
 - `SecurityAudit`
 

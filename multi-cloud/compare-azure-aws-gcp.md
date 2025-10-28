@@ -1,4 +1,4 @@
-﻿# Azure vs AWS vs GCP - ScoutSuite Comparison
+# Azure vs AWS vs GCP — ScoutSuite Comparison
 
 ## Scope
 - **Azure**: WGU Student Subscription (CLI auth)
@@ -26,6 +26,6 @@
 - Centralize logs to SIEM (Sentinel/Splunk/Cloud Logging exports).
 
 ## Lessons Learned
-- Identity sprawl and public storage are the most common multi-cloud risks.
-- Provider registration and service enablement gates many Azure findings.
-- Baseline CSPM plus SIEM and IaC guardrails provide the fastest risk reduction.
+- Identity sprawl & public storage are the most common multi-cloud risks.
+- “Provider registration / service enablement” gates a lot of findings.
+- Baseline CSPM + SIEM + IaC guardrails = fastest risk reduction.

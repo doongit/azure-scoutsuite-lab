@@ -3,7 +3,7 @@
 ##############################################
 
 locals {
-  storage_role_assignments_enabled = length(trim(var.app_sp_object_id)) > 0
+  storage_role_assignments_enabled = length(trimspace(var.app_sp_object_id)) > 0
 }
 
 resource "azurerm_role_assignment" "storage_blob_contributor" {
