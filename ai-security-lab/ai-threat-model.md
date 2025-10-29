@@ -1,29 +1,29 @@
-﻿# AI Security Mini Threat Model (NIST AI RMF Mapping)
+# AI Security Mini Threat Model
 
-**Context:** Tiny CLI and Streamlit app that call an LLM with guardrails:
-- RBAC for allowed actions (`query`, `summarize`, `admin`)
-- Prompt-injection filter (deny "ignore previous instructions", exfiltration, tool abuse)
-- Secrets via `.env` (no keys in code/repo)
+This Streamlit and CLI lab calls an LLM while enforcing three core guardrails:
+* Role based access control gating each action.
+* Prompt filter that rejects ignore the rules attacks and exfiltration attempts.
+* Secrets managed through `.env` so keys never sit in the repo.
 
-## System Diagram (logical)
-User -> App (RBAC check) -> Prompt Filter -> LLM API -> Response
+## Flow
+`User` → `App` (RBAC check) → `Prompt filter` → `LLM API` → `Response`
 
-## Key Risks & Controls
+## Key risks and controls
 | Risk | Control | Notes | NIST AI RMF |
-|------|---------|-------|-------------|
-| Prompt injection | Pattern blacklist + sanitization; minimal system prompt | Basic first line of defense | **Map/Measure:** A.1, B.2 |
-| Data exfil / prompt leaks | Never echo system; refuse "reveal system prompt" | Policy enforced in system msg | **Manage:** C.2 |
-| Overbroad access | RBAC via `rbac.json` | Least-privilege actions | **Govern:** G.1 |
-| Secret exposure | `.env`, gitignore key files | Rotate keys, no commits | **Manage:** C.3 |
-| Abuse / misuse | Action constraints (`summarize/query`) | No tool execution | **Map/Manage:** A.2, C.1 |
+| --- | --- | --- | --- |
+| Prompt injection | Pattern checks plus prompt sanitizing with a lean system message | First line of defense | Map and Measure A.1, B.2 |
+| Data exposure | System prompt never echoed and requests to reveal it are refused | Policy enforced in code | Manage C.2 |
+| Over broad access | RBAC policy in `rbac.json` | Keeps actions least privilege | Govern G.1 |
+| Secret exposure | `.env` with gitignore rules | Rotate keys, never commit secrets | Manage C.3 |
+| Abuse of tools | Action list limited to query, summarize, admin | No tool execution or shell passthrough | Map and Manage A.2, C.1 |
 
-## Validation Ideas
-- Unit tests for `filter_prompt` patterns.
-- Red/purple-team prompts to improve denylist.
-- Log allowed/blocked prompts for tuning (no PII).
-- UI smoke tests for Streamlit workflow (RBAC + filter).
+## Validation ideas
+* Add unit tests for `filter_prompt`.
+* Throw red team prompts at the filter to refine patterns.
+* Log allowed and blocked prompts for tuning without storing personal data.
+* Smoke test the Streamlit flow to confirm RBAC and filtering both fire.
 
 ## Roadmap
-- Add context windows with retrieval; add allowlist-based DSL for tools.
-- Model-specific safety (JSON schema outputs, function calling with hard constraints).
-- Add policy-as-code (Open Policy Agent) for RBAC decisions.
+* Layer in retrieval or context windows once guardrails expand.
+* Introduce allow list driven tool calls with strict schemas.
+* Bring in policy engines such as OPA for RBAC decisions.

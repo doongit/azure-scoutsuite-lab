@@ -1,32 +1,50 @@
-﻿# azure-scoutsuite-lab
-Hands-on Azure Zero-Trust security assessment using ScoutSuite and Azure CLI. Includes methodology, key findings, and mapped remediations aligned with CIS & NIST 800-53.
+# Cloud and AI Security Lab
+Hands on Azure assessment, a secured LLM lab, and an opinionated Terraform landing zone packaged to showcase cloud security skills with room to expand into multi cloud and AI governance.
 
-## Repo Map
-- `ScoutSuite/` - local copy of ScoutSuite and generated reports (kept out of Git via `.gitignore`).
-- `scout-notes/azure-wgu-lab.md` - redacted findings summary with evidence references.
-- `screenshots/` - redacted PNGs such as `azure-dashboard-redacted.png`, `azure-logging-alerts-redacted.png`, `azure-security-center-redacted.png`.
-- `reports/` - local-only storage for redacted CSV exports (`Azure-Active-Directory-Applications-redacted.csv`, `RBAC-Roles-redacted.csv`) and raw HTML (do not commit unredacted data).
-- `multi-cloud/` - AWS and GCP playbooks plus cross-cloud comparison.
-- `terraform-iac-demo/` - secure storage landing zone IaC sample (now with `terraform.tfvars.example`).
-- `ai-security-lab/` - RBAC + prompt-filtering LLM showcase with shared CLI + Streamlit GUI.
-- `tfc-policy-set/` - optional Terraform configuration to publish Sentinel guardrails to Terraform Cloud.
+## Where the lab stands today
+* Azure ScoutSuite review is complete with redacted evidence linked in `scout-notes` and `screenshots`.
+* AI Security Lab delivers a guarded CLI and Streamlit app plus a NIST AI RMF aligned threat model.
+* Terraform secure storage landing zone runs locally and highlights Zero Trust defaults.
+* Terraform Cloud automation and multi cloud scans sit in `FUTURE-WORK.md` until elevated access is approved.
 
-## Screenshot Guidance
-Add redacted evidence to `screenshots/` using descriptive names (example: `azure-rbac-redacted.png`). Reference them in notebooks or docs, but keep raw/full reports outside version control for privacy.
+## What lives in the repo
+* `ScoutSuite/` houses the local tool install and generated HTML report that stays out of Git.
+* `scout-notes/azure-wgu-lab.md` keeps the narrative report tied back to specific evidence.
+* `screenshots/` stores redacted PNGs such as `azure-dashboard-redacted.png`.
+* `reports/` contains redacted CSV exports `Azure-Active-Directory-Applications-redacted.csv` and `RBAC-Roles-redacted.csv`.
+* `ai-security-lab/` includes the RBAC aware LLM demo, Streamlit front end, and AI threat model.
+* `terraform-iac-demo/` contains the secure landing zone Terraform with policy guardrail scaffolding.
+* `FUTURE-WORK.md` spells out the roadmap for Terraform Cloud, multi cloud, and governance follow ups.
 
-## Quickstart
-1. Activate virtual environment inside `ScoutSuite/` and install dependencies.
-2. Run `scout azure --cli --subscriptions <subscription-id>` or `python -m ScoutSuite azure ...`.
-3. Review HTML report under `ScoutSuite/scoutsuite-report/` and capture redacted screenshots for documentation.
+## Evidence guidelines
+* Keep raw ScoutSuite HTML, CSV exports, and unredacted screenshots outside version control.
+* Name redacted screenshots clearly and store them under `screenshots`.
+* Reference evidence paths inside the notes so reviewers can trace each finding.
 
-### AI Security Lab at a Glance
+## Run the Azure ScoutSuite workflow
+```powershell
+cd ScoutSuite
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+scout azure --cli --subscriptions <SUBSCRIPTION_ID>
+```
+Open the generated HTML under `ScoutSuite/scoutsuite-report`, capture redacted visuals, and refresh `scout-notes/azure-wgu-lab.md` with any new insights.
+
+## Run the AI Security Lab
 ```powershell
 cd ai-security-lab
-python -m venv .venv; .\.venv\Scripts\Activate.ps1
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-copy .env.example .env  # add your key
+copy .env.example .env
 python secured-llm-app.py --user analyst_alice --action query --prompt "Explain zero trust in one line."
-# optional GUI
 streamlit run app.py
 ```
-Refer to `ai-security-lab/README.md` for guardrail demos and the Streamlit workflow.
+The lab enforces RBAC, filters unsafe prompts, and keeps secrets in `.env`. The README inside the folder covers guardrail demos and the threat model.
+
+## Terraform landing zone
+The secure storage pattern lives in `terraform-iac-demo`. The README explains how to apply it locally with private endpoints and encryption defaults. Sentinel style policy files remain in `terraform-iac-demo/policies` as scaffolding for future automation. Remote Terraform Cloud execution is staged in `FUTURE-WORK.md` once the correct subscription permissions are available.
+
+## Future ready items
+`FUTURE-WORK.md` outlines next moves for multi cloud ScoutSuite runs, Terraform Cloud integration, AI governance evidence, and certification proof points that align with cloud and AI security architect expectations.

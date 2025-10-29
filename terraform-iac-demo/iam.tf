@@ -16,4 +16,4 @@ resource "azurerm_role_assignment" "storage_blob_contributor" {
   ]
 }
 
-# Sentinel policies can inspect var.sentinel_enforced_regions to ensure location compliance.
+# Future policy-as-code tooling can inspect var.sentinel_enforced_regions to ensure location compliance.

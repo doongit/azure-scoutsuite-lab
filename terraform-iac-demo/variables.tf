@@ -11,7 +11,7 @@ variable "resource_group_name" {
 }
 
 variable "storage_account_name_prefix" {
-  description = "Prefix used for the storage account name (will be suffixed for uniqueness)"
+  description = "Prefix used for the storage account name with a random suffix for uniqueness"
   type        = string
   default     = "securestoragedemo"
 }
@@ -23,7 +23,7 @@ variable "app_sp_object_id" {
 }
 
 variable "sentinel_enforced_regions" {
-  description = "Approved Azure regions enforced by Sentinel/Azure Policy guardrails"
+  description = "Approved Azure regions enforced by future policy guardrails"
   type        = list(string)
   default     = ["westus", "westus3", "northcentralus", "mexicocentral", "eastus2"]
 }

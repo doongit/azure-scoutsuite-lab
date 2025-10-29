@@ -1,7 +1,10 @@
 import "tfplan/v2" as tfplan
 
+allowed_regions = json.unmarshal(file("allowed_regions.json"))
+
 main = rule {
-  all tfplan.module_calls.main.variables.location as loc {
-    loc in tfplan.module_calls.main.variables.sentinel_enforced_regions
+  all tfplan.resource_changes as _, rc {
+    not rc.change.after.location or
+    rc.change.after.location in allowed_regions
   }
 }
