@@ -18,3 +18,4 @@ reports/**/
 terraform.tfvars
 terraform.tfvars.json
 crash.log
+ai-security-lab/.env
