@@ -1,33 +1,33 @@
 # Future Work Roadmap
 
-This plan tracks the next set of upgrades once cloud credentials and higher trust levels are available.
+This roadmap outlines planned technical upgrades following the establishment of cloud credentials and trust levels to support organizational goals.
 
-## Multi cloud ScoutSuite expansion
-* Goal: Apply the Azure playbook to AWS and GCP to prove depth across providers.
-* Inputs needed: Read only roles with MFA on AWS and GCP along with isolated profiles for scanning.
+## Multi-cloud ScoutSuite expansion
+* Goal: Adapt the Microsoft Azure playbook for Amazon Web Services (AWS) and Google Cloud Platform (GCP) to demonstrate broad cloud capability.
+* Required: Secure read-only roles with MFA on AWS and GCP, and isolate scanning profiles.
 * Steps:
-  1. Run ScoutSuite against each provider and store HTML output outside the repo.
-  2. Create redacted evidence that mirrors the Azure set for identity, storage, logging, and threat detection.
-  3. Update the comparison write up with real metrics and risks that map to CIS, NIST, and DoD guidance.
-* Expected proof: Redacted screenshots, a refreshed comparison note, and a talking point on shared remediation themes.
+  1. Run ScoutSuite scans for each provider and house the HTML output in a secure, access-controlled site external to the repository.
+  2. Produce redacted evidence sets for identity, storage, logging, and threat detection, consistent with the Azure implementation.
+  3. Revise the comparative analysis to align metrics and risks with CIS, NIST, and DoD standards.
+* Deliverables: Supply redacted screenshots, updated summary, and key remediation strategies.
 
 ## Terraform Cloud automation
-* Goal: Move the secure landing zone into Terraform Cloud so every change is logged, tested, and policy checked.
-* Inputs needed: Azure service principal with Contributor on the target subscription and a Terraform Cloud org with workspace and policy rights.
+* Goal: Transition the secure landing zone to Terraform Cloud to log, test, and verify changes.
+* Required: Provision an Azure service principal (Contributor role) and configure Terraform Cloud org with workspace and policy rights.
 * Steps:
-  1. Create a Terraform Cloud workspace for `terraform-iac-demo` using remote execution.
-  2. Load Azure credentials as sensitive environment variables and migrate `terraform.tfvars` values into workspace variables.
-  3. Enable the Sentinel style policies in `terraform-iac-demo/policies` or an equivalent OPA stack and record the first policy enforced run.
-  4. Capture screenshots and run IDs for evidence tied to NIST 800-53, CMMC, and Zero Trust requirements.
-* Expected proof: Terraform Cloud history showing plan and apply outputs, policy evaluation logs, and a short write up connecting the flow to RMF continuous monitoring.
+  1. Establish a Terraform Cloud workspace for `terraform-iac-demo` and enable remote execution capabilities.
+  2. Secure Azure credentials as sensitive and migrate tfvars values into workspace variables.
+  3. Enforce Sentinel-style policies in `terraform-iac-demo/policies` or an equivalent OPA stack, and document the initial policy-enforced execution.
+  4. Gather screenshots and run identifiers as evidence, mapping them to NIST 800-53, CMMC, and Zero Trust requirements.
+*  Deliverables: Present Terraform Cloud history documenting plan and apply outputs, policy evaluation logs, and a concise summary linking the workflow to RMF continuous monitoring.
 
 ## AI governance and GenAI controls
-* Goal: Extend the AI Security Lab to cover AI risk governance and model assurance.
-* Inputs needed: Training on NIST AI RMF, privacy review templates, and access to moderation or watermarking APIs.
+* Goal: Expand the AI Security Lab to govern AI risk and assure model integrity.
+* Required: Complete training on NIST AI RMF, implement privacy templates, and access moderation APIs.
 * Steps:
-  1. Add prompt logging with redaction, risk tagging, and least privilege retention to the existing lab.
-  2. Map current controls to NIST AI RMF functions and document open gaps in a simple register.
-  3. Produce a sample assessment that explains how the lab would meet DoD or EU AI policy checkpoints.
-* Expected proof: Updated threat model, governance checklist, and a short blog style summary suitable for recruiters and hiring managers.
+  1. Implement prompt logging with redaction, risk tags, and least privilege retention in the lab.
+  2. Map controls to NIST AI RMF and log gaps in a structured register.
+  3. Draft a sample assessment demonstrating lab compliance with DoD or EU AI requirements.
+* Deliverables:  Offer updated threat model, governance checklist, and sample evidence for each control linked to compliance.
 
-Advance this roadmap as soon as cloud access is granted, then fold the deliverables back into the repo so they support interviews and portfolio reviews.
+Once I receive cloud access, I will proceed with the roadmap and add the deliverables to our repository to support interviews and portfolio reviews.

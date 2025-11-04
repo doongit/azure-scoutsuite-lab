@@ -1,12 +1,12 @@
 # AI Security Mini Threat Model
 
-This Streamlit and CLI lab calls an LLM while enforcing three core guardrails:
-* Role-based access control, gating each action.
-* Prompt filter that rejects ignore the rules attacks and exfiltration attempts.
-* Secrets managed through `.env` so keys never sit in the repo.
+This Streamlit and command-line interface (CLI) laboratory integrates a large language model (LLM) while enforcing three primary security guardrails:
+* Role-based access control (RBAC) restricts each action based on user permissions.
+* A prompt filter rejects attempts to bypass established rules and prevents data exfiltration.
+* Secrets, including API keys and passwords, are managed using a `.env` file to ensure sensitive values are not exposed in the repository.
 
 ## Flow
-`User` → `App` (RBAC check) → `Prompt filter` → `LLM API` → `Response`
+`User` → `Application` (RBAC verification) → `Prompt filter` → `LLM API` → `Response`
 
 ## Key risks and controls
 | Risk | Control | Notes | NIST AI RMF |
@@ -18,12 +18,12 @@ This Streamlit and CLI lab calls an LLM while enforcing three core guardrails:
 | Abuse of tools | Action list limited to query, summarize, admin | No tool execution or shell passthrough | Map and Manage A.2, C.1 |
 
 ## Validation ideas
-* Add unit tests for `filter_prompt`.
-* Throw red team prompts at the filter to refine patterns.
-* Log allowed and blocked prompts for tuning without storing personal data.
-* Smoke test the Streamlit flow to confirm RBAC and for both fires.
+* Implement unit tests for the `filter_prompt`.
+* Evaluate the filter using adversarial (red team) prompts to refine detection patterns.
+* Log both allowed and blocked prompts for filter tuning, ensuring no personal data is stored.
+* Conduct smoke tests on the Streamlit workflow to validate RBAC functionality and ensure comprehensive scenario coverage.
 
 ## Roadmap
-* Layer in retrieval or context windows once guardrails expand.
-* Introduce allow list driven tool calls with strict schemas.
-* Bring in policy engines such as OPA for RBAC decisions.
+* Integrate retrieval mechanisms or context windows as additional guardrails are implemented.
+*  Introduce tool calls governed by an allow list and enforce strict data schemas for each operation.
+* Integrate policy engines, such as Open Policy Agent (OPA), to automate RBAC decision-making.
