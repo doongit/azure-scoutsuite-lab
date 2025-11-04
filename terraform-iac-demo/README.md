@@ -1,13 +1,13 @@
 # Azure Secure Terraform Lab
 
-This configuration delivers a private first storage landing zone that fits a Zero Trust story. It is designed as hands on evidence that you can secure Azure services with Terraform while keeping the door open for policy automation later.
+This configuration creates a private-first storage landing zone in line with Zero Trust principles. It demonstrates that Terraform secures Azure services and supports future policy automation.
 
 ## What the module builds
-* Resource group with ownership, environment, and project tags.
-* Storage account using StorageV2, TLS 1.2, infrastructure encryption, HTTPS only traffic, and soft delete.
-* Virtual network plus subnet reserved for private endpoints.
-* Private DNS zone for `privatelink.blob.core.windows.net` with a virtual network link.
-* Private endpoint bound to the storage account blob service.
+* Provision a resource group with ownership, environment, and project tags.
+* Deploy a StorageV2 account using TLS 1.2, enforces infrastructure encryption, restricts traffic to HTTPS, and enables soft delete.
+* Establish a virtual network and subnet reserved for private endpoints.
+* Configure a private DNS zone for `privatelink.blob.core.windows.net` and link it to the virtual network.
+* Bind a private endpoint to the storage account blob service.
 
 ## Prerequisites
 * Terraform CLI 1.6.0 or newer.
@@ -36,12 +36,12 @@ terraform apply
 terraform destroy
 ```
 
-Tip: add `-auto-approve` to the apply or destroy command during demos when you want to skip the prompt.
+Tip: To bypass confirmation prompts during demonstrations, add `-auto-approve` to the apply or destroy command.
 
-Regional note: the sample variables use `westus`, which met the policy requirements in the student subscription. Update `location` in `terraform.tfvars` or pass `-var "location=<region>"` if your tenant enforces a different list.
+Regional note: The sample variables specify `westus`, which satisfied policy requirements in the student subscription. Update the `location` value in `terraform.tfvars` or use `-var "location=<region>"` if your tenant enforces a different region list.
 
 ## Policy guardrail scaffolding
-The `policies` folder contains Sentinel style rules that deny public storage access and enforce allowed regions. They remain as scaffolding until Terraform Cloud automation goes live. The full cloud hosted workflow is laid out in `FUTURE-WORK.md`.
+The `policies` folder contains Sentinel-style rules that deny public storage access and enforce region restrictions. Refer to the policies folder in the repository root for these scaffolding rules. They are intended as interim measures until Terraform Cloud automation is implemented. Details on the full cloud-hosted workflow can be found in `FUTURE-WORK.md`.
 
 ## Local quality checks
 You can lint the configuration even without Azure credentials:
